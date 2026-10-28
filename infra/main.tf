@@ -12,28 +12,14 @@ data "aws_ami" "al2023" {
   }
 }
 
-# CAMBIO 1: el servidor web sube de t3.micro a m5.large.
 resource "aws_instance" "web" {
   ami           = data.aws_ami.al2023.id
-  instance_type = "m5.large"
+  instance_type = "t3.micro"
 
   tags = {
     Name        = "web"
     Owner       = "equipo-plataforma"
     CostCenter  = "CC-1001"
-    Environment = "dev"
-  }
-}
-
-# CAMBIO 2: dos servidores de aplicación nuevos... sin CostCenter.
-resource "aws_instance" "app" {
-  count         = 2
-  ami           = data.aws_ami.al2023.id
-  instance_type = "t3.micro"
-
-  tags = {
-    Name        = "app-${count.index}"
-    Owner       = "equipo-pagos"
     Environment = "dev"
   }
 }
