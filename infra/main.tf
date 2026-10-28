@@ -21,7 +21,6 @@ resource "aws_instance" "web" {
   tags = {
     Name        = "web"
     Owner       = "equipo-plataforma"
-    CostCenter  = "CC-1001"
     Environment = "dev"
   }
 }
