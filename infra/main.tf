@@ -1,4 +1,4 @@
-# ETAPA 1 (base) — la infraestructura "actual" de main.
+# PRUEBA AVISO — el web sube a m5.xlarge para que Cost Evaluation falle.
 # Cloudability usa este ID de cuenta para aplicar tus precios negociados.
 data "aws_caller_identity" "defaultidentity" {}
 
@@ -15,7 +15,7 @@ data "aws_ami" "al2023" {
 
 resource "aws_instance" "web" {
   ami           = data.aws_ami.al2023.id
-  instance_type = "t3.micro"
+  instance_type = "m5.xlarge"
 
   tags = {
     Name        = "web"
