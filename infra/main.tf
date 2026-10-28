@@ -1,5 +1,5 @@
 # Cloudability usa este ID de cuenta para aplicar tus precios negociados.
-# CAMBIO 2
+# CAMBIO 3
 data "aws_caller_identity" "defaultidentity" {}
 
 # AMI más reciente de Amazon Linux 2023.
@@ -21,7 +21,7 @@ resource "aws_instance" "web" {
   tags = {
     Name        = "web"
     Owner       = "equipo-plataforma"
-    CostCenter  = "CC-1001"
+    CostCenter  = "CC-2040"
     Environment = "dev"
   }
 }
