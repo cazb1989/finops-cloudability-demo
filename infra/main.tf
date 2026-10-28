@@ -1,41 +1,21 @@
-# Cloudability usa este ID de cuenta para aplicar tus precios negociados.
-# CAMBIO 3
-data "aws_caller_identity" "defaultidentity" {}
-
-# AMI más reciente de Amazon Linux 2023.
-data "aws_ami" "al2023" {
-  most_recent = true
-  owners      = ["amazon"]
-
-  filter {
-    name   = "name"
-    values = ["al2023-ami-2023*-x86_64"]
-  }
-}
-
-# CAMBIO 1: el servidor web sube de t3.micro a m5.large.
-resource "aws_instance" "web" {
-  ami           = data.aws_ami.al2023.id
-  instance_type = "m5.large"
+# PRUEBA: recursos fuera de la lista de servicios soportados por Governance.
+# Con todos los tags: ¿cómo aparece en Estimation?
+resource "aws_route53_zone" "prueba" {
+  name = "governance-demo.internal"
 
   tags = {
-    Name        = "web"
     Owner       = "equipo-plataforma"
-    CostCenter  = "CC-2040"
+    CostCenter  = "CC-1001"
     Environment = "dev"
   }
 }
 
-# CAMBIO 2: dos servidores de aplicación nuevos... sin CostCenter.
-resource "aws_instance" "app" {
-  count         = 2
-  ami           = data.aws_ami.al2023.id
-  instance_type = "t3.micro"
+# Sin CostCenter: ¿lo evalúa la política de tags?
+resource "aws_ecr_repository" "prueba" {
+  name = "governance-demo-prueba"
 
   tags = {
-    Name        = "app-${count.index}"
-    Owner       = "equipo-pagos"
-    CostCenter  = "CC-2040"
+    Owner       = "equipo-plataforma"
     Environment = "dev"
   }
 }
