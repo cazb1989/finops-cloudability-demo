@@ -35,6 +35,7 @@ resource "aws_instance" "app" {
   tags = {
     Name        = "app-${count.index}"
     Owner       = "equipo-pagos"
+    CostCenter  = "CC-2040"
     Environment = "dev"
   }
 }
